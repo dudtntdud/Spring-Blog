@@ -1,1 +1,0 @@
-INSERT INTO Board(name, created_at) VALUE('notice', CURRENT_TIMESTAMP());
