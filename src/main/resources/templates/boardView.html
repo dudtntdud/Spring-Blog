@@ -10,38 +10,68 @@
 <body>
 <h3>게시글 상세</h3>
 <div style="padding : 30px;">
-    <div class="form-group">
+    <div class="form-group" style="float:left; margin : 30px">
         <label>제목</label>
         <span th:text="${board.subject}"></span>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="float:left; margin : 30px">
         <label>작성자</label>
         <span th:text="${board.writer}"></span>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="float:left; margin : 30px">
         <label>작성날짜</label>
         <span th:text="${board.reg_date}"></span>
     </div>
-    <!--<div class="form-group">-->
-        <!--<label>추천수</label>-->
-        <!--<span th:text="${board.recommand}"></span>-->
-    <!--</div>-->
-    <div class="form-group">
+    <div class="form-group" style="clear:both; float:left; margin : 30px">
+        <label>추천수</label>
+        <span th:text="${board.recommand}"></span>
+    </div>
+    <div class="form-group" style="float:left; margin : 30px">
         <label>조회수</label>
         <span th:text="${board.hit}"></span>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="clear:both; margin : 30px">
         <label>내용</label>
         <p style="padding: 100px; text-align: left" th:text="${board.content}"></p>
     </div>
     <div class="form-group">
-        <input class="btn btn-primary" style="float : left" type="button" value="추천"/>
-        <input class="btn btn-primary" style="float : left" type="button" value="수정" th:attr="onclick='location.href=\'/board/post/'+${board.bno}+'\''"/>
+
+            <input class="btn btn-primary" style="float : left" type="button" value="추천" th:attr="onclick='location.href=\'/board/'+${board.bno}+'/recommand\''"/>
+            <input class="btn btn-primary" style="float : left" type="button" value="수정" th:attr="onclick='location.href=\'/board/post/'+${board.bno}+'\''"/>
+
         <form th:action="@{/board/post/}+${board.bno}" th:method="DELETE">
             <input class="btn btn-primary" style="float : left" type="submit" value="삭제"/>
         </form>
-        <input class="btn btn-primary" style="float : left" type="button" value="뒤로가기" th:attr="onclick='location.href=\'/board\''"/>
+
+            <input class="btn btn-primary" style="float : left" type="button" value="뒤로가기" th:attr="onclick='location.href=\'/board\''"/>
     </div>
 </div>
+
+<h4>댓글</h4>
+<div style="padding : 30px;">
+    <table class="table">
+        <tr>
+            <th>작성자</th>
+            <th>작성날짜</th>
+            <th>내용</th>
+        </tr>
+        <tr th:each="reply : ${reply_list}" th:if="${reply.board_bno} == ${board.bno}">
+            <td th:text="${reply.writer}">글쓴이</td>
+            <td th:text="${reply.reg_date}">글쓴시간</td>
+            <td th:text="${reply.content}">내용</td>
+        </tr>
+    </table>
+</div>
+<form method="POST" th:action="@{/board/reply/} + ${board.bno}">
+    <div class="form-group">
+        <label>작성자</label>
+        <input type="text" name="writer" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>내용</label>
+        <textarea name="content" class="form-control" rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">작성</button>
+</form>
 </body>
 </html>

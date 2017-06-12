@@ -1,6 +1,7 @@
 package com.seokwon.blog.controller;
 
 import com.seokwon.blog.domain.BoardVO;
+import com.seokwon.blog.domain.ReplyVO;
 import com.seokwon.blog.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +22,10 @@ public class BoardListController {
     private BoardMapper boardMapper;
 
 
-    //게시글 목록
+    //게시글,댓글 목록
     @RequestMapping(method= RequestMethod.GET)
     public ModelAndView list(Model model, @RequestParam(value ="board", defaultValue = "board") String board) throws Exception{
         model.addAttribute("board", "ok");
-
         List<BoardVO> list = boardMapper.boardList();
 
         return new ModelAndView("boardList","list",list);
@@ -48,12 +48,31 @@ public class BoardListController {
     }
 
     @RequestMapping(value="/{bno}",method=RequestMethod.GET)
-    public ModelAndView view(@PathVariable("bno") int bno) throws Exception{
+    public ModelAndView view(Model model, @RequestParam(value ="reply", defaultValue = "reply") String reply, @PathVariable("bno") int bno) throws Exception{
 
         BoardVO board = boardMapper.boardView(bno);
         boardMapper.hitPlus(bno);
 
-        return new ModelAndView("boardView","board",board);
+        model.addAttribute("reply", "ok");
+        List<ReplyVO> reply_list = boardMapper.replyList();
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("boardView");
+        mav.addObject("board",board);
+        mav.addObject("reply_list",reply_list);
+
+//        new ModelAndView("boardView","board",board);
+//        return new ModelAndView("boardView","reply_list",reply_list);
+        return mav;
+    }
+
+    @RequestMapping(value="/{bno}/recommand",method=RequestMethod.GET)
+    public String recommand(@PathVariable("bno") int bno) throws Exception{
+
+        BoardVO board = boardMapper.boardView(bno);
+        boardMapper.recommandPlus(bno);
+
+        return "redirect://localhost:8080/board/" + bno;
     }
 
     //게시글 수정 페이지(GET)
@@ -80,5 +99,14 @@ public class BoardListController {
         boardMapper.boardDelete(bno);
 
         return "redirect://localhost:8080/board";
+    }
+
+    //리플 작성(POST)
+    @RequestMapping(value="/reply/{board_bno}",method=RequestMethod.POST)
+    public String reply_write(Model model, @ModelAttribute("ReplyVO") ReplyVO reply, @PathVariable("board_bno") int board_bno) throws Exception{
+
+        boardMapper.replyInsert(reply);
+
+        return "redirect://localhost:8080/board/"+board_bno;
     }
 }

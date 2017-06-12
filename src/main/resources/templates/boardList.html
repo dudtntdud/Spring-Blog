@@ -19,6 +19,7 @@
         <th>작성자</th>
         <th>작성날짜</th>
         <th>조회수</th>
+        <th>추천수</th>
     </tr>
     <tr th:each="board : ${list}">
         <td th:text="${board.bno}">글번호</td>
@@ -27,6 +28,7 @@
         <td th:text="${board.writer}">글쓴이</td>
         <td th:text="${board.reg_date}">글쓴시간</td>
         <td th:text="${board.hit}">조회수</td>
+        <td th:text="${board.recommand}">추천수</td>
     </tr>
 </table>
 </body>

@@ -8,7 +8,7 @@
     <insert id="boardInsert" parameterType="com.seokwon.blog.domain.BoardVO">
         insert into board_movie
         values
-        (#{bno},#{movie},#{subject},#{content},#{writer},now(),0)
+        (#{bno},#{movie},#{subject},#{content},#{writer},now(),0,0)
     </insert>
 
     <select id="boardList" resultType="com.seokwon.blog.domain.BoardVO">
@@ -21,6 +21,10 @@
 
     <update id="hitPlus" parameterType="int">
         update board_movie set hit = hit+1 where bno = #{bno}
+    </update>
+
+    <update id="recommandPlus" parameterType="int">
+        update board_movie set recommand = recommand+1 where bno = #{bno}
     </update>
 
     <update id="boardUpdate" parameterType="com.seokwon.blog.domain.BoardVO">

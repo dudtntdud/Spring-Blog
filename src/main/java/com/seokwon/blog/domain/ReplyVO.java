@@ -3,17 +3,14 @@ package com.seokwon.blog.domain;
 import java.util.Date;
 
 /**
- * Created by ncl on 2017-06-11.
+ * Created by ncl on 2017-06-12.
  */
-public class BoardVO {
+public class ReplyVO {
     private int bno;
-    private String movie;
-    private String subject;
+    private int board_bno;
     private String content;
     private String writer;
     private Date reg_date;
-    private int hit;
-    private int recommand;
 
     public int getBno() {
         return bno;
@@ -23,20 +20,12 @@ public class BoardVO {
         this.bno = bno;
     }
 
-    public String getMovie() {
-        return movie;
+    public int getBoard_bno() {
+        return board_bno;
     }
 
-    public void setMovie(String movie) {
-        this.movie = movie;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setBoard_bno(int board_bno) {
+        this.board_bno = board_bno;
     }
 
     public String getContent() {
@@ -63,19 +52,4 @@ public class BoardVO {
         this.reg_date = reg_date;
     }
 
-    public int getHit() {
-        return hit;
-    }
-
-    public void setHit(int hit) {
-        this.hit = hit;
-    }
-
-    public int getRecommand() {
-        return recommand;
-    }
-
-    public void setRecommand(int recommand) {
-        this.recommand = recommand;
-    }
 }

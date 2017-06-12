@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+<mapper namespace="com.seokwon.blog.mapper.BoardMapper">
+
+    <insert id="replyInsert" parameterType="com.seokwon.blog.domain.ReplyVO">
+        insert into reply
+        values
+        (#{bno},#{board_bno},#{content},#{writer},now())
+    </insert>
+
+    <select id="replyList" resultType="com.seokwon.blog.domain.ReplyVO">
+        select * from reply
+    </select>
+
+    <select id="replyView" parameterType="int" resultType="com.seokwon.blog.domain.ReplyVO">
+        select * from reply where board_bno = #{board_bno}
+    </select>
+
+    <update id="replyUpdate" parameterType="com.seokwon.blog.domain.ReplyVO">
+        update reply set content = #{content} where board_bno = #{board_bno}
+    </update>
+
+    <delete id="replyDelete" parameterType="int">
+        delete from reply where board_bno = #{board_bno}
+    </delete>
+
+</mapper>
