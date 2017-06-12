@@ -8,6 +8,13 @@
     <title>게시글 작성</title>
 </head>
 <body>
+<div th:if="${session.id}">
+    <span th:text="${session.id}"></span>
+    <a href="logout">로그아웃</a>
+</div>
+<div th:unless="${session.id}">
+    로그인안됨
+</div>
 <h3>게시글 작성</h3>
 <div style="padding : 30px;">
 

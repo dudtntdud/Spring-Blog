@@ -9,7 +9,14 @@
 </head>
 <body>
 <h3>게시글 목록</h3>
-<button class="btn btn-primary" style="float : right;">로그인</button>
+<div th:if="${session.id}">
+    <span th:text="${session.id}"></span>
+    <button class="btn btn-primary" style="float : right;" onclick="location.href='/logout'">로그아웃</button>
+</div>
+<div th:unless="${session.id}">
+    <button class="btn btn-primary" style="float : right;" onclick="location.href='/login'">로그인</button>
+</div>
+
 <button class="btn btn-primary" style="float : right;" onclick="location.href='/board/post'">작성</button>
 <table class="table">
     <tr>
