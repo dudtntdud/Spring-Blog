@@ -30,7 +30,7 @@
     </div>
     <div class="form-group">
         <label>작성자</label>
-        <input type="text" name="writer" class="form-control"/>
+        <input type="text" name="writer" class="form-control" th:value="${session.id}" th:readonly="readonly"/>
     </div>
     <div class="form-group">
         <label>내용</label>

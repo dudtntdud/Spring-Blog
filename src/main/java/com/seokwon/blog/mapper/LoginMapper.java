@@ -12,4 +12,8 @@ import java.util.HashMap;
  */
 public interface LoginMapper {
     public UserVO findyByUserIdAndPassword(@Param("userId") String userId, @Param("Password") String Password);
+
+    public UserVO register(UserVO VO);
 }
+
+

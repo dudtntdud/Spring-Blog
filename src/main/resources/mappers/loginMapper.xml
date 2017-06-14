@@ -8,4 +8,10 @@
         select * from user where userId = #{userId} and Password = #{Password}
     </select>
 
+    <select id="register" parameterType="String" resultType="com.seokwon.blog.domain.UserVO">
+        insert into user
+        values
+        (#{userId},#{Password},#{userName})
+    </select>
+
 </mapper>

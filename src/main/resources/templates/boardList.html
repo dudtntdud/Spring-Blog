@@ -10,6 +10,7 @@
 <body>
 <h3>게시글 목록</h3>
 <div th:if="${session.id}">
+    <span>현재 로그인 계정 : </span>
     <span th:text="${session.id}"></span>
     <button class="btn btn-primary" style="float : right;" onclick="location.href='/logout'">로그아웃</button>
 </div>

@@ -59,6 +59,11 @@
             <td th:text="${reply.writer}">글쓴이</td>
             <td th:text="${reply.reg_date}">글쓴시간</td>
             <td th:text="${reply.content}">내용</td>
+
+            <input class="btn btn-primary" style="float : left" type="button" value="수정" th:attr="onclick='location.href=\'/board/post/'+${board.bno}+'\''"/>
+            <form th:action="@{/board/post/}+${board.bno}" th:method="DELETE">
+                <input class="btn btn-primary" style="float : left" type="submit" value="삭제"/>
+            </form>
         </tr>
     </table>
 </div>
