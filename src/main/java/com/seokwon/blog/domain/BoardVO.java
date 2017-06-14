@@ -14,6 +14,7 @@ public class BoardVO {
     private Date reg_date;
     private int hit;
     private int recommand;
+    private String thumbnail;
 
     public int getBno() {
         return bno;
@@ -77,5 +78,13 @@ public class BoardVO {
 
     public void setRecommand(int recommand) {
         this.recommand = recommand;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

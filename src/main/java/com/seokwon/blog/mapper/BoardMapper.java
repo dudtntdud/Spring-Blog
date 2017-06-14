@@ -44,5 +44,8 @@ public interface BoardMapper {
     public void replyUpdate(ReplyVO vo)throws Exception;
 
     //리플삭제
-    public void replyDelete(int bno)throws Exception;
+    public void replyDelete(@Param("board_bno") String board_bno, @Param("writer") String writer, @Param("bno") String bno);
+
+    //모든리플삭제
+    public void allReplyDelete(int bno)throws Exception;
 }

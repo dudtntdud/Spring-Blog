@@ -5,6 +5,7 @@
     <!-- BootStrap CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
     <title>게시글 목록</title>
 </head>
 <body>
@@ -13,15 +14,16 @@
     <span>현재 로그인 계정 : </span>
     <span th:text="${session.id}"></span>
     <button class="btn btn-primary" style="float : right;" onclick="location.href='/logout'">로그아웃</button>
+    <button class="btn btn-primary" style="float : right;" onclick="location.href='/board/post'">작성</button>
 </div>
 <div th:unless="${session.id}">
     <button class="btn btn-primary" style="float : right;" onclick="location.href='/login'">로그인</button>
 </div>
 
-<button class="btn btn-primary" style="float : right;" onclick="location.href='/board/post'">작성</button>
+
 <table class="table">
     <tr>
-        <th>No</th>
+        <th>Thumbnail</th>
         <th>영화제목</th>
         <th>글제목</th>
         <th>작성자</th>
@@ -30,13 +32,13 @@
         <th>추천수</th>
     </tr>
     <tr th:each="board : ${list}">
-        <td th:text="${board.bno}">글번호</td>
-        <td><span th:text="${board.movie}" href="#">영화제목</span></td>
-        <td><a th:href="@{'/board/' + ${board.bno}}" th:text="${board.subject}">글제목</a></td>
-        <td th:text="${board.writer}">글쓴이</td>
-        <td th:text="${board.reg_date}">글쓴시간</td>
-        <td th:text="${board.hit}">조회수</td>
-        <td th:text="${board.recommand}">추천수</td>
+        <td><img width="100px" height="100px" th:src="${board.thumbnail}"/></td>
+        <td style="vertical-align: middle;"><span th:text="${board.movie}" href="#">영화제목</span></td>
+        <td style="vertical-align: middle;"><a th:href="@{'/board/' + ${board.bno}}" th:text="${board.subject}">글제목</a></td>
+        <td style="vertical-align: middle;" th:text="${board.writer}">글쓴이</td>
+        <td style="vertical-align: middle;" th:text="${board.reg_date}">글쓴시간</td>
+        <td style="vertical-align: middle;" th:text="${board.hit}">조회수</td>
+        <td style="vertical-align: middle;" th:text="${board.recommand}">추천수</td>
     </tr>
 </table>
 </body>

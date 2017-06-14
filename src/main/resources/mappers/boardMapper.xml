@@ -8,7 +8,7 @@
     <insert id="boardInsert" parameterType="com.seokwon.blog.domain.BoardVO">
         insert into board_movie
         values
-        (#{bno},#{movie},#{subject},#{content},#{writer},now(),0,0)
+        (#{bno},#{movie},#{subject},#{content},#{writer},now(),0,0,#{thumbnail})
     </insert>
 
     <select id="boardList" resultType="com.seokwon.blog.domain.BoardVO">

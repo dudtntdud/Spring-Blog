@@ -3,12 +3,15 @@ package com.seokwon.blog.controller;
 import com.seokwon.blog.domain.BoardVO;
 import com.seokwon.blog.domain.ReplyVO;
 import com.seokwon.blog.mapper.BoardMapper;
+import com.seokwon.blog.mapper.LoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.util.List;
 
 /**
@@ -106,6 +109,21 @@ public class BoardListController {
     public String reply_write(Model model, @ModelAttribute("ReplyVO") ReplyVO reply, @PathVariable("board_bno") int board_bno) throws Exception{
 
         boardMapper.replyInsert(reply);
+
+        return "redirect://localhost:8080/board/"+board_bno;
+    }
+
+    //리플 작성(POST)
+    @RequestMapping(value="/deleteReply",method=RequestMethod.GET)
+    public String reply_delete(HttpServletRequest request) throws Exception{
+
+        String board_bno = request.getParameter("board_bno");
+        String writer = request.getParameter("writer");
+        String bno = request.getParameter("bno");
+        System.out.println(board_bno);
+        System.out.println(writer);
+        System.out.println(bno);
+        boardMapper.replyDelete(board_bno, writer, bno);
 
         return "redirect://localhost:8080/board/"+board_bno;
     }

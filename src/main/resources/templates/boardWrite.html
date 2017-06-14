@@ -19,18 +19,34 @@
 <div style="padding : 30px;">
 
     <form method="POST" th:action="@{/board/post}">
-    <div class="form-group">
-        <label>영화</label>
-        <input type="text" name="movie" class="form-control"/>
-    </div>
-    <button type="submit" class="btn btn-default" style="margin-bottom:10px">영화검색</button>
+    <table class="table">
+        <tr>
+            <th>썸네일</th>
+            <th>영화제목</th>
+            <th>감독</th>
+            <th>줄거리</th>
+        </tr>
+        <tr>
+            <td><img width="150px" height="150px" id="thumbnail"/></td>
+            <td id = "title" th:text="검색해주세요">영화제목</td>
+            <td id = "director" th:text="검색해주세요">감독</td>
+            <td id = "story" th:text="검색해주세요">줄거리</td>
+        </tr>
+    </table>
+
+    <p type="submit" class="btn btn-default" style="margin-bottom:10px" id="openNewWindow">영화검색</p>
     <div class="form-group">
         <label>글제목</label>
         <input type="text" name="subject" class="form-control"/>
     </div>
     <div class="form-group">
-        <label>작성자</label>
-        <input type="text" name="writer" class="form-control" th:value="${session.id}" th:readonly="readonly"/>
+        <input type="hidden" name="writer" class="form-control" th:value="${session.id}" th:readonly="readonly"/>
+    </div>
+    <div class="form-group">
+        <input id="title2" type="hidden" name="movie" class="form-control" th:readonly="readonly"/>
+    </div>
+    <div class="form-group">
+        <input id="thumbnail2" name="thumbnail" type="hidden" class="form-control" th:readonly="readonly"/>
     </div>
     <div class="form-group">
         <label>내용</label>
@@ -39,5 +55,7 @@
         <button type="submit" class="btn btn-default">작성</button>
     </form>
 </div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{../js/write.js}"></script>
 </body>
 </html>
