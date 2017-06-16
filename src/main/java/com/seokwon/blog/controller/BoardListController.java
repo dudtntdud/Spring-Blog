@@ -24,12 +24,28 @@ public class BoardListController {
     @Autowired
     private BoardMapper boardMapper;
 
+    private String prevGet;
 
     //게시글,댓글 목록
     @RequestMapping(method= RequestMethod.GET)
-    public ModelAndView list(Model model, @RequestParam(value ="board", defaultValue = "board") String board) throws Exception{
+    public ModelAndView list(HttpServletRequest request, Model model, @RequestParam(value = "search", defaultValue = "") String search, @RequestParam(value = "sort", defaultValue = "time") String sort) throws Exception{
         model.addAttribute("board", "ok");
-        List<BoardVO> list = boardMapper.boardList();
+        List<BoardVO> list;
+
+        if(search.equals("")){
+            if(sort.equals("title")) {
+                list = boardMapper.SortboardListBytitle(sort);
+            }
+            else if(sort.equals("recommand")){
+                list = boardMapper.SortboardListByrecommand(sort);
+            }
+            else{
+                list = boardMapper.boardList();
+            }
+        }else {
+            search = "%"+search+"%";
+            list = boardMapper.findListBySearch(search);
+        }
 
         return new ModelAndView("boardList","list",list);
     }
@@ -47,7 +63,7 @@ public class BoardListController {
 
         boardMapper.boardInsert(board);
 
-        return "redirect://localhost:8080/board";
+        return "redirect:/board";
     }
 
     @RequestMapping(value="/{bno}",method=RequestMethod.GET)
@@ -75,7 +91,7 @@ public class BoardListController {
         BoardVO board = boardMapper.boardView(bno);
         boardMapper.recommandPlus(bno);
 
-        return "redirect://localhost:8080/board/" + bno;
+        return "redirect:/board/" + bno;
     }
 
     //게시글 수정 페이지(GET)
@@ -93,7 +109,7 @@ public class BoardListController {
 
         boardMapper.boardUpdate(board);
 
-        return "redirect://localhost:8080/board/"+bno;
+        return "redirect:/board/"+bno;
     }
     //게시글 삭제(DELETE)
     @RequestMapping(value="/post/{bno}", method=RequestMethod.DELETE)
@@ -101,7 +117,7 @@ public class BoardListController {
 
         boardMapper.boardDelete(bno);
 
-        return "redirect://localhost:8080/board";
+        return "redirect:/board";
     }
 
     //리플 작성(POST)
@@ -110,7 +126,7 @@ public class BoardListController {
 
         boardMapper.replyInsert(reply);
 
-        return "redirect://localhost:8080/board/"+board_bno;
+        return "redirect:/board/"+board_bno;
     }
 
     //리플 작성(POST)
@@ -125,6 +141,6 @@ public class BoardListController {
         System.out.println(bno);
         boardMapper.replyDelete(board_bno, writer, bno);
 
-        return "redirect://localhost:8080/board/"+board_bno;
+        return "redirect:/board/"+board_bno;
     }
 }

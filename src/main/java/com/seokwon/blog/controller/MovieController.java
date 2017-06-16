@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class MovieController {
+
     @RequestMapping("/moviesearch")
     public ModelAndView index()
     {

@@ -1,9 +1,12 @@
 package com.seokwon.blog.domain;
 
+
 /**
  * Created by ncl on 2017-06-13.
  */
+
 public class UserVO {
+
     private String userId;
     private String Password;
     private String userName;

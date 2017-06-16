@@ -41,6 +41,11 @@ function addUrlList(){
    console.log(apiurl);
 }
 
+function buttonclick(){
+  pagenumber++;
+  addUrlList();
+}
+
 $(document).ready(function(){
     $('body').click(function(e) {
         var id = e.target.getAttribute("id");

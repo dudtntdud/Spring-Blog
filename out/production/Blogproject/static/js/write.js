@@ -21,23 +21,3 @@ $(function(){
         openNewWindow("../moviesearch.html");
     });
 });
-
-$(function(){
-   $('#submit').click(function(){
-       var form = document.getElementsByTagName("input")
-       for(var i = 0; i < form.length; i++){
-           if(form[i]=="" || form[i]==null){
-               alert("값을 입력바랍니다.");
-               return false;
-           }
-       }
-   });
-});
-
-function blankCheck(){
-    var form = document.getElementsByTagName("input")
-    console.log(form);
-    if(document.form.subject.value=="" ){
-        alert("빈칸이 있으면 안됩니다.");
-    }
-}

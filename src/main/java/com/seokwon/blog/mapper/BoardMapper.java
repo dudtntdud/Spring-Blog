@@ -16,8 +16,18 @@ public interface BoardMapper {
     //글목록
     public List<BoardVO> boardList()throws Exception;
 
+    //정렬방법
+    public List<BoardVO> SortboardListByrecommand(String sort);
+    public List<BoardVO> SortboardListBytitle(String sort);
+
     //글보기
     public BoardVO boardView(int bno)throws Exception;
+
+    //글번호로 ID 찾기
+    public BoardVO findIdByPostNumber(int board_name)throws Exception;
+
+    //이름으로 게시글검색
+    public List<BoardVO> findListBySearch(@Param("search") String search)throws Exception;
 
     //조회수 증가
     public void hitPlus(int bno)throws Exception;

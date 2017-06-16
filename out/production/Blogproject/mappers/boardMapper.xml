@@ -15,24 +15,8 @@
         select * from board_movie order by reg_date desc
     </select>
 
-    <select id="SortboardListByrecommand" parameterType="String" resultType="com.seokwon.blog.domain.BoardVO">
-        select * from board_movie order by recommand desc
-    </select>
-
-    <select id="SortboardListBytitle" parameterType="String" resultType="com.seokwon.blog.domain.BoardVO">
-        select * from board_movie order by subject
-    </select>
-
     <select id="boardView" parameterType="int" resultType="com.seokwon.blog.domain.BoardVO">
         select * from board_movie where bno = #{bno}
-    </select>
-
-    <select id="findIdByPostNumber" parameterType="int" resultType="com.seokwon.blog.domain.BoardVO">
-        select * from board_movie where bno = #{bno}
-    </select>
-
-    <select id="findListBySearch" parameterType="string" resultType="com.seokwon.blog.domain.BoardVO">
-        select * from board_movie where subject like #{search} || writer like #{search} || movie like #{search}
     </select>
 
     <update id="hitPlus" parameterType="int">
